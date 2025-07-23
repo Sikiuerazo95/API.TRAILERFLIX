@@ -196,7 +196,7 @@ module.exports = {
 };
 ```
 
-### Carpeta `routes/`
+### Carpeta `routes`
 
 Esta carpeta contiene los archivos que definen las rutas de nuestra **API.TRAILERFLIX**. Cada archivo suele corresponder a un conjunto de funcionalidades y dentro se configuraron las rutas HTTP (GET, POST, PUT, DELETE) para manejar las solicitudes relacionadas.
 
