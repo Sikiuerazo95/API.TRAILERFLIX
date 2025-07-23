@@ -16,7 +16,7 @@ const ContenidoTag = sequelize.define("ContenidoTag", {
         type: DataTypes.INTEGER,
         primaryKey: true,
         references: {
-            model: "tags",
+            model: "tag",
             key: "idtags"
         }
     }
