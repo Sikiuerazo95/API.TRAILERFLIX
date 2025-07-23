@@ -118,4 +118,98 @@ El archivo **app.js** se conecta a la base de datos **Mysql** utlizando un archi
   
 ---
 
+## 🗂️ Estructura general del proyecto
+
+Este proyecto esta organizado en varias carpetas y archivos claves que nos ayudan en la organizacion del codigo y en la escalabilidad de la API.
+
+### `app.js`
+
+Es el archivo principal que configura y levanta el servidor **Express**, configura middlewares globales, como el manejo de JSON con **express.json()**, importa y registra las rutas de la API, define el puerto por el cual se va a escucha el servidor e inicia el servidor.
+
+### Carpeta `models`
+
+La carpeta models contiene los modelos de datos que definen la estructura de las tablas utilizadas en la base de datos de la **API.TRAILERFLIX**, asi como sus relaciones y configuraciones, todos los modelos usan sequelize para definir los tipos de datos y configurar las claves primarias, foraneas y restricciones.
+
+El archivo **registro.js** es el nucleo central de los modelos en la **API.TRAILERFLIX** ya que se encarga de **definir las relaciones** entre las distintas tablas, **importar y registrar** todos los modelos, **configurar y exportar** para poder utilizarlo en diferentes partes de la aplicacion 
+
+```javascript 
+const {sequelize} = require('../database');
+
+const Contenido = require('./contenido');
+const Actor = require('./actores');
+const Reparto = require('./reparto');
+const Tag = require('./tags');
+const ContenidoTag = require('./contenido_tags');
+const ContenidoCompleto = require("./contenido_completo");
+const Categoria = require('./categorias');
+const Genero = require('./generos');
+
+
+Contenido.belongsToMany(Tag, {
+  through: ContenidoTag,
+  foreignKey: 'idContenido',
+  otherKey: 'idTag'
+});
+Tag.belongsToMany(Contenido, {
+  through: ContenidoTag,
+  foreignKey: 'idTag',
+  otherKey: 'idContenido'
+});
+
+Contenido.belongsToMany(Actor, {
+  through: Reparto,
+  foreignKey: 'idContenido',
+  otherKey: 'idActor'
+});
+Actor.belongsToMany(Contenido, {
+  through: Reparto,
+  foreignKey: 'idActor',
+  otherKey: 'idContenido'
+});
+
+
+Contenido.belongsTo(Categoria, {
+  foreignKey: 'idCategoria'
+});
+Categoria.hasMany(Contenido, {
+  foreignKey: 'idCategoria'
+});
+
+Contenido.belongsTo(Genero, {
+  foreignKey: 'idGenero'
+});
+Genero.hasMany(Contenido, {
+  foreignKey: 'idGenero'
+});
+
+
+module.exports = {
+  sequelize,
+  ContenidoCompleto,
+  Contenido,
+  Actor,
+  Reparto,
+  Tag,
+  ContenidoTag,
+  Categoria,
+  Genero
+};
+```
+
+### Carpeta `routes/`
+
+Esta carpeta contiene los archivos que definen las rutas de nuestra **API.TRAILERFLIX**. Cada archivo suele corresponder a un conjunto de funcionalidades y dentro se configuraron las rutas HTTP (GET, POST, PUT, DELETE) para manejar las solicitudes relacionadas.
+
+El archivo **index.js** se encarga de **centralizar y organizar** todos los endpoints de la API.TRAILERFLIX. 
+
+| Método | Ruta                     | Descripción                              | 
+| ------ | ------------------------ | ---------------------------------------- |
+| GET    | `/catalogo`              | Obtiene todo el contenido del catálogo   |
+| GET    | `/catalogo/:id`          | Obtiene un contenido por su ID           | 
+| GET    | `/categorias/:categoria` | Filtra contenido por categoría           | 
+| GET    | `/generos/:genero`       | Filtra contenido por género              | 
+| GET    | `/completo`              | Obtiene el contenido con datos completos | 
+| POST   | `/catalogo`              | Crea un nuevo contenido                  |  
+| PUT    | `/catalogo/:id`          | Actualiza un contenido existente         | 
+| DELETE | `/catalogo/:id`          | Elimina un contenido por su ID           |                                                                           |
 

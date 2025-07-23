@@ -10,10 +10,6 @@ const create = require("./catalogo/create");
 const update = require("./catalogo/update");
 const remove = require("./catalogo/delete"); 
 
-router.get('/', (req, res) => {
-  res.send("Bienvenido a la API trailerflix🎬📺");
-});
-
 router.get ("/catalogo", getAll);
 router.get ("/catalogo/:id", getByID);
 router.get ("/categorias/:categoria", getByCategorias);
