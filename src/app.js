@@ -1,5 +1,5 @@
 const express = require("express");
-require("dotenv").config( { path: __dirname + "/../.env" });
+require("dotenv").config();
 const routes = require('./routes/index');
 const PORT = process.env.PORT || 3000;
 
@@ -10,7 +10,7 @@ app.use("/",routes);
 
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost: ${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
 console.log("📦 Sequelize config:", {
