@@ -282,7 +282,7 @@ const { ContenidoCompleto } = require('../../models/registro');
 
 #### 📍 GET /completo
 
-📖 **Descripción:** Devuelve el catálogo completo de títulos en TrailerFlix.
+📖 **Descripción:** Devuelve el catálogo completo de títulos.
 
 ✅ **Respuesta exitosa (200):** Array de objetos con los títulos disponibles, sus categorías y géneros.
 
