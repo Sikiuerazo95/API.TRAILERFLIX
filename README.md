@@ -607,3 +607,8 @@ DELETE /catalogo/:id
 * `Reparto`
 
 ---
+
+## Authors
+
+* Yessica Sikiu Erazo Leon 
+* Araceli Santamaria
