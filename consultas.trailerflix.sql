@@ -19,9 +19,9 @@ SELECT DISTINCT c.titulo
 FROM contenido c
 JOIN categorias cat ON c.idCategoria = cat.idCategoria
 JOIN contenido_tags ct1 ON c.idContenido = ct1.idContenido
-JOIN tags t1 ON ct1.idTags = t1.idTags
+JOIN tags t1 ON ct1.idTag = t1.idTag
 JOIN contenido_tags ct2 ON c.idContenido = ct2.idContenido
-JOIN tags t2 ON ct2.idTags = t2.idTags
+JOIN tags t2 ON ct2.idTag = t2.idTag
 WHERE cat.nombreCategoria = 'Película'
   AND (
     (t1.nombreTag = 'Aventura' AND t2.nombreTag = 'Ciencia Ficción') OR
@@ -69,7 +69,7 @@ FROM contenido c
 JOIN categorias cat ON c.idCategoria = cat.idCategoria
 JOIN generos g ON c.idGenero = g.idGenero
 LEFT JOIN contenido_tags ct ON c.idContenido = ct.idContenido
-LEFT JOIN tags t ON ct.idTags = t.idTags
+LEFT JOIN tags t ON ct.idTag = t.idTag
 WHERE cat.nombreCategoria = 'Película'
 GROUP BY c.idContenido;
 
@@ -85,7 +85,7 @@ FROM contenido c
 JOIN categorias cat ON c.idCategoria = cat.idCategoria
 JOIN generos g ON c.idGenero = g.idGenero
 LEFT JOIN contenido_tags ct ON c.idContenido = ct.idContenido
-LEFT JOIN tags t ON ct.idTags = t.idTags
+LEFT JOIN tags t ON ct.idTag = t.idTag
 WHERE cat.nombreCategoria = 'Serie'
 GROUP BY c.idContenido;
 
