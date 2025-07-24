@@ -608,7 +608,7 @@ DELETE /catalogo/:id
 
 ---
 
-## Authors
+## Autoras
 
 * Yessica Sikiu Erazo Leon 
 * Araceli Santamaria
