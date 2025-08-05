@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
     });
     res.status(200).json(resultado);
   } catch (error){
+     console.error("🔥 Error en GET /catalogo:", error);
       res.status(500).json({ error: "Hubo un error en el servidor"});
   }
 };
