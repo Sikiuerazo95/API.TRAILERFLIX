@@ -13,6 +13,14 @@ require('dotenv').config({ path: '../.env' });
     }
     ); //se insrancia la librería Sequalize, informando en esta el nombre de la bb.dd., el nombre de usario y la contraseña, a traás de parámetros separados
 
+    console.log("🔍 Conectando a MySQL con:", {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME
+    });
+
+
     async function authenticate() {
         try{
             await sequelize.authenticate();
